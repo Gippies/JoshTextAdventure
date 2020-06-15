@@ -1,32 +1,32 @@
 
 class Location:
-    def __init__(self, description, north_location, south_location, east_location, west_location):
+    def __init__(self, description, locations):
         self.description = description
+        self.locations = {'N': locations['N']}
 
-        self.north_location = north_location
-        if north_location is not None:
-            north_location.south_location = self
+        if locations['N'] is not None:
+            locations['N'].locations['S'] = self
 
-        self.south_location = south_location
-        if south_location is not None:
-            south_location.north_location = self
+        self.locations['S'] = locations['S']
+        if locations['S'] is not None:
+            locations['S'].locations['N'] = self
 
-        self.east_location = east_location
-        if east_location is not None:
-            east_location.west_location = self
+        self.locations['E'] = locations['E']
+        if locations['E'] is not None:
+            locations['E'].locations['W'] = self
 
-        self.west_location = west_location
-        if west_location is not None:
-            west_location.east_location = self
+        self.locations['W'] = locations['W']
+        if locations['W'] is not None:
+            locations['W'].locations['E'] = self
 
     def __str__(self):
         travel_str = "You may travel: "
-        if self.north_location is not None:
+        if self.locations['N'] is not None:
             travel_str += "(N)orth "
-        if self.south_location is not None:
+        if self.locations['S'] is not None:
             travel_str += "(S)outh "
-        if self.east_location is not None:
+        if self.locations['E'] is not None:
             travel_str += "(E)ast "
-        if self.west_location is not None:
+        if self.locations['W'] is not None:
             travel_str += "(W)est"
         return self.description + '\n' + travel_str
