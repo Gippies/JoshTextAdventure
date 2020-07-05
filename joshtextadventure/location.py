@@ -2,22 +2,12 @@
 class Location:
     def __init__(self, description, locations):
         self.description = description
-        self.locations = {'N': locations['N']}
-
-        if locations['N'] is not None:
-            locations['N'].locations['S'] = self
-
-        self.locations['S'] = locations['S']
-        if locations['S'] is not None:
-            locations['S'].locations['N'] = self
-
-        self.locations['E'] = locations['E']
-        if locations['E'] is not None:
-            locations['E'].locations['W'] = self
-
-        self.locations['W'] = locations['W']
-        if locations['W'] is not None:
-            locations['W'].locations['E'] = self
+        directions = {'N': 'S', 'S': 'N', 'E': 'W', 'W': 'E'}
+        self.locations = {}
+        for k, v in directions.items():
+            self.locations[k] = locations[k]
+            if locations[k] is not None:
+                locations[k].locations[v] = self
 
     def __str__(self):
         travel_str = "You may travel: "
