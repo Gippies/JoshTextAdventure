@@ -1,5 +1,14 @@
 
 class Parser:
+    commands = {
+        'N': 'Travel North',
+        'S': 'Travel South',
+        'E': 'Travel East',
+        'W': 'Travel West',
+        'help': 'Display this message',
+        'exit': 'Quits the game'
+    }
+
     def __init__(self, game):
         self.game = game
 
@@ -12,8 +21,10 @@ class Parser:
             else:
                 self.game.printer.msg = "Invalid Location"
         elif value == 'help':
-            # TODO: Put in a proper help message.
-            self.game.printer.msg = ""
+            msg = ''
+            for k, v in Parser.commands.items():
+                msg += '"' + k + '": ' + v + '\n'
+            self.game.printer.msg = msg
         elif value == 'exit':
             exit()
         else:

@@ -6,7 +6,8 @@ from joshtextadventure.printer import Printer
 class Game:
     def __init__(self):
         self.player = Player()
-        self.printer = Printer(self.player)
+        welcome_msg = "Hello, welcome to Josh's Text Adventure!\n" + str(self.player)
+        self.printer = Printer(welcome_msg)
         self.parser = Parser(self)
 
     def run(self):
