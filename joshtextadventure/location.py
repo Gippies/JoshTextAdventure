@@ -1,13 +1,17 @@
 
 class Location:
-    def __init__(self, description, locations):
-        self.description = description
+    locations = {}
+
+    def __init__(self, location_dict):
+        self.location_id = location_dict['id']
+        Location.locations[location_dict['id']] = self
+        self.description = location_dict['description']
         directions = {'N': 'S', 'S': 'N', 'E': 'W', 'W': 'E'}
         self.locations = {}
         for k, v in directions.items():
-            self.locations[k] = locations[k]
-            if locations[k] is not None:
-                locations[k].locations[v] = self
+            self.locations[k] = Location.locations[location_dict[k]] if location_dict[k] is not None and location_dict[k] in Location.locations else None
+            if location_dict[k] is not None:
+                Location.locations[location_dict[k]].locations[v] = self
 
     def __str__(self):
         travel_str = "You may travel: "

@@ -1,22 +1,8 @@
-from joshtextadventure.location import Location
-
-
 class Player:
-    def __init__(self):
+    def __init__(self, location):
         self.health = 10.0
         self.inventory = None
-        north_location = Location("You're on the edge of a cliff", {
-            'N': None,
-            'S': None,
-            'E': None,
-            'W': None
-        })
-        self.current_location = Location('You are in a forrest', {
-            'N': north_location,
-            'S': None,
-            'E': None,
-            'W': None
-        })
+        self.current_location = location
 
     def __str__(self):
         player_str = 'Health: ' + str(self.health) + '\n'
